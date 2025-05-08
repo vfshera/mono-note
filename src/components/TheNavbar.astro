@@ -1,23 +1,86 @@
 ---
 import { site } from "~/constants/config";
+
+const links: {
+  name: string;
+  href: string;
+}[] = [
+  {
+    name: "Home",
+    href: "/",
+  },
+  {
+    name: "About",
+    href: "/about/",
+  },
+  {
+    name: "Archive",
+    href: "/archive/",
+  },
+];
 ---
 
-<header class="container">
-  <a href="/" class="logo">{site.title}</a>
+<header class="border-brand-6 dark:border-brand-7 container mb-8 border-b pb-8">
+  <a href="/" class="text-2xl font-bold">{site.title}</a>
   <p>{site.description}</p>
 
-  <nav>
-    <div class="menu">
-      <a href="#home">Home</a>
-      <a href="#about">About</a>
-      <a href="#archive">Archive</a>
-    </div>
-    <button class="theme-toggle" onclick="toggleTheme()">Dark / Light</button>
+  <nav
+    class="mt-4 flex flex-col items-start justify-between max-md:gap-4 md:flex-row md:items-center"
+  >
+    <ul class="flex items-center gap-4 max-md:mt-2 md:gap-6">
+      {
+        links.map((link) => (
+          <a href={link.href} class="hover:underline">
+            {link.name}
+          </a>
+        ))
+      }
+    </ul>
+    <button
+      id="theme-toggle"
+      class="border-accent cursor-pointer border px-2 py-1">Dark / Light</button
+    >
   </nav>
 </header>
 
 <script>
-  function toggleTheme() {
-    document.body.classList.toggle("dark-mode");
+  const toggleBtn = document.getElementById(
+    "theme-toggle"
+  ) as HTMLButtonElement;
+
+  const THEME_KEY = "theme";
+
+  const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+
+  function setTheme(theme: string) {
+    if (theme === "light") {
+      document.body.classList.remove("dark");
+    }
+
+    if (theme === "dark" && !document.body.classList.contains("dark")) {
+      document.body.classList.add("dark");
+    }
+
+    localStorage.setItem(THEME_KEY, theme);
   }
+
+  function loadTheme() {
+    const savedTheme = localStorage.getItem(THEME_KEY);
+
+    if (savedTheme === "light" || savedTheme === "dark") {
+      setTheme(savedTheme);
+    } else {
+      setTheme(prefersDark ? "dark" : "light");
+    }
+  }
+
+  toggleBtn.addEventListener("click", () => {
+    const newTheme = document.body.classList.contains("dark")
+      ? "light"
+      : "dark";
+
+    setTheme(newTheme);
+  });
+
+  loadTheme();
 </script>
