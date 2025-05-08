@@ -52,6 +52,19 @@ export default tseslint.config(
           argsIgnorePattern: "^_",
           destructuredArrayIgnorePattern: "^_",
         },
+      ], "padding-line-between-statements": [
+        "warn",
+        { blankLine: "always", prev: "*", next: ["return", "export"] },
+        {
+          blankLine: "always",
+          prev: ["const", "let", "var", "block-like", "export"],
+          next: "*",
+        },
+        {
+          blankLine: "always",
+          prev: ["const", "let", "var", "block-like", "export"],
+          next: ["const", "let", "var", "block-like", "export"],
+        },
       ],
     },
   }

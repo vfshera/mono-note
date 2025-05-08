@@ -2,9 +2,9 @@
 import { site } from "~/constants/config";
 ---
 
-<footer class="px-5 py-2 border-t border-gray-200">
-  <p class="text-center text-sm italic">
-    &copy; {new Date().getFullYear()} -
-    <strong class="font-medium">{site.title} </strong>
+<footer class="container">
+  <p>
+    © {new Date().getFullYear()}
+    {site.title} — {site.footerTagLine}
   </p>
 </footer>

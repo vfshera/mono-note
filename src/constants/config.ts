@@ -1,4 +1,5 @@
 export const site = {
-  title: "Start Astro",
-  description: "",
+  title: "MonoNote",
+  description: "A Monospaced Writer's Blog",
+  footerTagLine: "Crafted with a digital typewriter",
 } as const;
