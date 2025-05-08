@@ -1,10 +1,5 @@
-# Preffered
-Preffered starter template
-
-## Create your new Astro project by running.
-```sh
-pnpm create astro@latest --template vfshera/start-astro/apps/preffered
-```
+# MonoNote
+A Monospaced Writer's Blog
 
 ## 🧞 Commands
 
