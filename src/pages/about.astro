@@ -2,7 +2,7 @@
 import Layout from "~/layouts/Layout.astro";
 ---
 
-<Layout>
+<Layout title="About">
   <main class="container">
     <section class="content-area">
       <h1>About MonoNote</h1>
@@ -24,7 +24,7 @@ import Layout from "~/layouts/Layout.astro";
 
       <h2>Writing Toolstack</h2>
 
-      <ul style="list-style-type: none; padding-left: 1rem;">
+      <ul class="pl-4">
         <li>• Text Editor: iA Writer</li>
         <li>• Notes: Obsidian (with minimal plugins)</li>
         <li>• Terminal: iTerm with zsh</li>
@@ -32,7 +32,7 @@ import Layout from "~/layouts/Layout.astro";
         <li>• OS: macOS (dark mode)</li>
       </ul>
 
-      <p><a href="#home" class="read-more">← Back to home</a></p>
+      <p><a href="/" class="read-more">← Back to home</a></p>
     </section>
   </main>
 </Layout>

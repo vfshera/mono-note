@@ -44,7 +44,13 @@ const {
     />
     <slot name="head" />
   </head>
-  <body class:list={[classList, className]}>
+  <body
+    class:list={[
+      "font-courier bg-brand-1 dark:bg-brand-2 dark:text-brand-4 text-brand-3 text-base/[1.6]",
+      classList,
+      className,
+    ]}
+  >
     <slot />
   </body>
 </html>
