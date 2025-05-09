@@ -1,0 +1,32 @@
+---
+import type { CollectionEntry } from "astro:content";
+import { formatDate } from "~/utils";
+
+type Post = CollectionEntry<"posts">;
+interface Props extends Post {}
+
+const { id, data: post } = Astro.props;
+---
+
+<div
+  class="border-brand-6 dark:border-brand-7 mb-10 border-b border-dashed pb-8 last:border-b-0"
+>
+  <h2>{post.title}</h2>
+  <div class="text-brand-5 mb-4 text-[0.9rem]">{formatDate(post.date)}</div>
+  <p>{post.description}</p>
+  <ul class="tags mt-4 flex flex-wrap gap-2">
+    {
+      post.tags.map((tag) => (
+        <a
+          href="#"
+          class="tag border-brand-5 inline-block border px-2 py-0.5 text-[0.8rem]"
+        >
+          {tag}
+        </a>
+      ))
+    }
+  </ul>
+  <a href={`/posts/${id}/`} class="border-brand-5 mt-4 inline-block border-b">
+    Continue reading →
+  </a>
+</div>

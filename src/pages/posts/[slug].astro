@@ -1,0 +1,41 @@
+---
+import { render } from "astro:content";
+import { getCollection } from "astro:content";
+import Layout from "~/layouts/Layout.astro";
+import { formatDate } from "~/utils";
+
+export async function getStaticPaths() {
+  const posts = await getCollection("posts", ({ data }) => !data.draft);
+
+  return posts.map((post) => ({
+    params: { slug: post.id },
+    props: { post },
+  }));
+}
+
+const { post } = Astro.props;
+
+const { Content } = await render(post);
+---
+
+<Layout title={post.data.title} description={post.data.description}>
+  <main class="container">
+    <section class="content-area">
+      <article class="mb-12">
+        <h1>{post.data.title}</h1>
+        <p class="text-brand-5 mb-4 text-[0.9rem]">
+          {formatDate(post.data.date)}
+        </p>
+
+        <div>
+          <Content />
+        </div>
+
+        <p>
+          <a href="/" class="border-brand-5 mt-4 inline-block border-b"
+            >← Back to posts</a>
+        </p>
+      </article>
+    </section>
+  </main>
+</Layout>
