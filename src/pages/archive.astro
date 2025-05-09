@@ -1,52 +1,70 @@
 ---
+import type { CollectionEntry } from "astro:content";
+import { getCollection } from "astro:content";
 import Layout from "~/layouts/Layout.astro";
+
+const posts = (await getCollection("posts", ({ data }) => !data.draft)).sort(
+  (a, b) => b.data.date.valueOf() - a.data.date.valueOf()
+);
+
+const postsByYear = new Map<number, CollectionEntry<"posts">[]>();
+
+const years = Array.from(
+  new Set(posts.map((post) => post.data.date.getFullYear()))
+).sort((a, b) => b - a);
+
+years.forEach((year) => {
+  postsByYear.set(year, []);
+});
+
+posts.forEach((post) => {
+  const year = post.data.date.getFullYear();
+
+  const yearPosts = postsByYear.get(year) || [];
+
+  yearPosts.push(post);
+  postsByYear.set(year, yearPosts);
+});
 ---
 
 <Layout title="Archive">
   <main class="container">
     <section class="content-area">
-      <h1>Archive</h1>
+      <h1 class="mb-4 text-3xl font-bold">Archive</h1>
 
-      <h2>2025</h2>
-      <ul style="list-style-type: none; padding-left: 1rem;">
-        <li>• May 7 — <a href="#post1">The Craft of Digital Writing</a></li>
-        <li>
-          • April 29 — <a href="#post2"
-            >Monospace Typography in the Modern Web</a
-          >
-        </li>
-        <li>
-          • April 18 — <a href="#post3"
-            >Markdown and the Return to Text-Based Creation</a
-          >
-        </li>
-        <li>
-          • March 24 — <a href="#"
-            >Minimal Writing Environments for Maximum Focus</a
-          >
-        </li>
-        <li>• February 12 — <a href="#">The Ethics of Plain Text</a></li>
-        <li>
-          • January 5 — <a href="#"
-            >New Year, New Tools: Writing Setup for 2025</a
-          >
-        </li>
-      </ul>
+      <div class="space-y-4">
+        {
+          years.map((year) => (
+            <div>
+              <h2 class="mb-4 text-2xl font-bold">{year}</h2>
+              <ol class="pl-4">
+                {postsByYear.get(year)?.map((post) => (
+                  <li>
+                    •{" "}
+                    {post.data.date.toLocaleDateString("en-US", {
+                      month: "long",
+                      day: "numeric",
+                    })}{" "}
+                    —{" "}
+                    <a
+                      href={`/posts/${post.id}/`}
+                      class="text-brand-8 dark:text-brand-9 underline"
+                    >
+                      {post.data.title}
+                    </a>
+                  </li>
+                ))}
+              </ol>
+            </div>
+          ))
+        }
+      </div>
 
-      <h2>2024</h2>
-      <ul style="list-style-type: none; padding-left: 1rem;">
-        <li>
-          • December 19 — <a href="#">Why I Switched Back to Static Sites</a>
-        </li>
-        <li>
-          • November 7 — <a href="#"
-            >The Case for Single-Purpose Writing Tools</a
-          >
-        </li>
-        <li>• October 23 — <a href="#">Finding Flow in Digital Writing</a></li>
-      </ul>
-
-      <p><a href="#home" class="read-more">← Back to home</a></p>
+      <div class="mt-4">
+        <a href="/" class="border-brand-5 mt-4 inline-block border-b"
+          >← Back to home</a
+        >
+      </div>
     </section>
   </main>
 </Layout>

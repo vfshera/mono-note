@@ -4,8 +4,8 @@ import Layout from "~/layouts/Layout.astro";
 
 <Layout title="About">
   <main class="container">
-    <section class="content-area">
-      <h1>About MonoNote</h1>
+    <section class="content-area prose *:text-brand-3 dark:*:text-brand-4">
+      <h1 class="text-3xl">About MonoNote</h1>
 
       <p>
         MonoNote is a space for thoughts on writing, technology, and the tools
@@ -24,15 +24,17 @@ import Layout from "~/layouts/Layout.astro";
 
       <h2>Writing Toolstack</h2>
 
-      <ul class="pl-4">
-        <li>• Text Editor: iA Writer</li>
-        <li>• Notes: Obsidian (with minimal plugins)</li>
-        <li>• Terminal: iTerm with zsh</li>
-        <li>• Font: IBM Plex Mono</li>
-        <li>• OS: macOS (dark mode)</li>
+      <ul class="list-inside pl-4">
+        <li>Text Editor: iA Writer</li>
+        <li>Notes: Obsidian (with minimal plugins)</li>
+        <li>Terminal: iTerm with zsh</li>
+        <li>Font: IBM Plex Mono</li>
+        <li>OS: macOS (dark mode)</li>
       </ul>
 
-      <p><a href="/" class="read-more">← Back to home</a></p>
+      <div class="not-prose">
+        <a href="/" class="read-more">← Back to home</a>
+      </div>
     </section>
   </main>
 </Layout>

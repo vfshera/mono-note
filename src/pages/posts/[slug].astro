@@ -21,20 +21,19 @@ const { Content } = await render(post);
 <Layout title={post.data.title} description={post.data.description}>
   <main class="container">
     <section class="content-area">
-      <article class="mb-12">
+      <article class="prose prose-mono-note mb-12">
         <h1>{post.data.title}</h1>
         <p class="text-brand-5 mb-4 text-[0.9rem]">
           {formatDate(post.data.date)}
         </p>
 
-        <div>
-          <Content />
-        </div>
+        <Content />
 
-        <p>
+        <div class="not-prose">
           <a href="/" class="border-brand-5 mt-4 inline-block border-b"
-            >← Back to posts</a>
-        </p>
+            >← Back to posts</a
+          >
+        </div>
       </article>
     </section>
   </main>
