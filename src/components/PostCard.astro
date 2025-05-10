@@ -28,7 +28,11 @@ const { id, data: post } = Astro.props;
       ))
     }
   </ul>
-  <a href={`/posts/${id}/`} class="border-brand-5 mt-4 inline-block border-b">
+  <a
+    href={`/posts/${id}/`}
+    data-astro-prefetch
+    class="border-brand-5 mt-4 inline-block border-b"
+  >
     Continue reading →
   </a>
 </div>

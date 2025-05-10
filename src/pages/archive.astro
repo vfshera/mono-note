@@ -48,6 +48,7 @@ posts.forEach((post) => {
                     —{" "}
                     <a
                       href={`/posts/${post.id}/`}
+                      data-astro-prefetch
                       class="text-brand-8 dark:text-brand-9 underline"
                     >
                       {post.data.title}
